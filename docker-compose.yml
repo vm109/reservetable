@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  mongo_db:
+    container_name: app_db
+    image: "bitnami/mongodb:latest"
+    ports:
+      - "27017:27017"
+    volumes:
+      - /Users/2500497/mongovolume
+  web:
+    build: .
+    container_name: app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo_db
+    links:
+      - mongo_db
